@@ -1,0 +1,69 @@
+﻿@model WebApplication1.Models.PeopleModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewBag.Title = "人員總覽";
+}
+<br />
+<h1>人員總覽</h1>
+<br />
+<h2>編輯</h2>
+@using (Html.BeginForm("ViewPage1", "Home", FormMethod.Post, new { @style = "border: 1px solid #aaa;overflow:hidden;padding:6px;background-color:#333;border-radius:12px;" }))
+{
+    @*<form action="ViewPage1" style="border: 1px solid #aaa;overflow:hidden;margin-top:24px;padding:6px;" method="post">*@
+    <div class="row" style="padding:25px 16px">
+        <div class="col-md-3" style="margin-top:6px">
+            <label style="color:white">ID</label>
+            @*<input id="ID" name="ID" />*@
+            @Html.TextBox("ID", Model.ID, new { @class = "form-control form1input1" })
+        </div>
+        <div class="col-md-3" style="margin-top:6px">
+            <label style="color:white">姓名</label>
+            @*<input id="NAME" name="NAME" />*@
+            @Html.TextBox("NAME", Model.NAME, new { @class = "form-control" })
+        </div>
+        <div class="col-md-3" style="margin-top:6px">
+            <label style="color:white">年齡</label>
+            @*<input id="AGE" name="AGE" class="form-control" />*@
+            @Html.TextBox("AGE", Model.AGE, new { @class = "form-control" })
+        </div>
+        <div class="col-md-3 form1button" style="margin-top:6px">
+            <label style="color:lightcoral">僅需輸入ID即可刪除該筆資料</label><br />
+            <button class="btn btn-primary" type="submit" name="insert" value="1">新增</button>
+            <button class="btn btn-warning" type="submit" name="update" value="1">修改</button>
+            <button class="btn btn-danger form1delete" type="submit" name="delete" value="1">刪除</button>
+        </div>
+    </div>
+    @*</form>*@
+}
+<br />
+<h2>人員列表</h2>
+<form action="ViewPage1" method="post" class="formList" style="border: 1px solid #aaa;overflow:hidden;padding:6px;background-color:#333;border-radius:12px;">
+    <table class="table" style="margin-bottom:0;">
+        <thead>
+            <tr style="color:white;">
+                <th scope="col" style="border-bottom:none;">ID</th>
+                <th scope="col" style="border-bottom:none;">姓名</th>
+                <th scope="col" style="border-bottom:none;">年齡</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.PeopleList)
+            {
+                <tr class="dataTr" style="color:white">
+                    <td style="line-height:3.4"><p style="margin:0;">@item.id</p></td>
+                    <td style="line-height:3.4"><p style="margin:0;">@item.name</p></td>
+                    <td style="line-height:3.4"><p style="margin:0;">@item.age</p></td>
+                    <td style="line-height:3.4">
+                        <button class="btn btn-warning" type="button" name="update" value="21">修改</button>
+                        <button class="btn btn-danger form2delete" type="submit" name="delete" value="deletemono">刪除</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
+
+
+
